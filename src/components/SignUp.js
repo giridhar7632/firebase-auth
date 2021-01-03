@@ -8,20 +8,20 @@ function SignUp() {
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const { signUp } = useAuth()
-  const [err, setErr] = useState('')
+  const [error, setError] = useState('')
   const [loading, setLoading] = useState('')
 
   async function handleSubmit(e){
     e.preventDefault()
     if(passwordRef.current.value === passwordConfirmRef.current.value){
-      return setErr("Passwords do not match")
+      return setError("Passwords do not match")
     }
     try{
-      setErr('')
+      setError('')
       setLoading( true)
       await signUp(emailRef.current.value, passwordRef.current.value)
     }catch{
-      setErr("Failed to create an account")
+      setError("Failed to create an account")
     }
     setLoading(false)
   }
@@ -31,7 +31,7 @@ function SignUp() {
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Sign Up</h2>
-          {err && <Alert variant="danger">{ err }</Alert>}
+          {error && <Alert variant="danger">{ error }</Alert>}
           <Form>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
