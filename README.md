@@ -11,4 +11,4 @@ User can sign in using:
 - Google
 - Facebook
 
-Live at []()
+Live at [https://firebase-auth-eosin.vercel.app/](https://firebase-auth-eosin.vercel.app/)
