@@ -29,6 +29,11 @@ export function AuthProvider({ children }) {
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
+  function googleSignInPopup(){
+    var provider = new auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    return auth().signInWithPopup(provider)
+  }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -46,6 +51,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    googleSignInPopup
   };
   return (
     <AuthContext.Provider value={value}>
