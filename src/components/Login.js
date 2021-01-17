@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Form, Card, Button, Alert } from "react-bootstrap";
+import { Form, Card, Button, Alert, Row, Col } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 
@@ -10,6 +10,12 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
   const history = useHistory();
+
+  const imgStyles = {
+    height: "25px",
+    width: "25px",
+    cursor: "pointer",
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,10 +32,35 @@ export default function Login() {
 
   return (
     <div>
+      <h3 className="w-responsive text-center mx-auto mb-4 p-3 mt-2 text-muted">
+        Log In
+      </h3>
       <Card>
         <Card.Body>
-          <h2 className="text-center mb-4">Log In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
+          <Row className="w-75 mx-auto text-center pt-2 mb-5">
+            <Col>
+              <img
+                src="https://cloud-fm947y3ba.vercel.app/2google.svg"
+                alt="google"
+                style={imgStyles}
+              />
+            </Col>
+            <Col>
+              <img
+                src="https://cloud-fm947y3ba.vercel.app/0github.svg"
+                alt="github"
+                style={imgStyles}
+              />
+            </Col>
+            <Col>
+              <img
+                src="https://cloud-fm947y3ba.vercel.app/1facebook.svg"
+                alt="facebook"
+                style={imgStyles}
+              />
+            </Col>
+          </Row>
           <Form>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
