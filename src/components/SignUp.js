@@ -44,18 +44,24 @@ export default function SignUp() {
         var credential = result.credential;
 
         // This gives you a Google Access Token. You can use it to access the Google API.
+        // eslint-disable-next-line
         var token = credential.accessToken;
         // The signed-in user info.
+        // eslint-disable-next-line
         var user = result.user;
         // ...
       })
       .catch((error) => {
         // Handle Errors here.
+        // eslint-disable-next-line
         var errorCode = error.code;
+        // eslint-disable-next-line
         var errorMessage = error.message;
         // The email of the user's account used.
+        // eslint-disable-next-line
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
+        // eslint-disable-next-line
         var credential = error.credential;
         // ...
       });
