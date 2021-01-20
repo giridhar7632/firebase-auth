@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const { login, signinWithGitHub } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
   const history = useHistory();
@@ -29,12 +29,22 @@ export default function Login() {
     }
     setLoading(false);
   }
+  // sign in with github
+  async function githubSignIn(e) {
+    try {
+      setError("");
+      setLoading(true);
+      await signinWithGitHub();
+      history.push("/");
+    } catch {
+      setError("Failed to create an account");
+    }
+    setLoading(false);
+  }
 
   return (
     <div>
-      <h3 className="w-responsive text-center mx-auto mb-4 p-3 mt-2 text-muted">
-        Log In
-      </h3>
+      <h3 className="w-responsive text-center mx-auto mb-4 p-3 mt-2">Log In</h3>
       <Card>
         <Card.Body>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -51,6 +61,7 @@ export default function Login() {
                 src="https://cloud-fm947y3ba.vercel.app/0github.svg"
                 alt="github"
                 style={imgStyles}
+                onClick={githubSignIn}
               />
             </Col>
             <Col>

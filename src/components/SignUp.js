@@ -7,7 +7,7 @@ export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signUp, googleSignInPopup } = useAuth();
+  const { signUp, signinWithGitHub } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
   const history = useHistory();
@@ -33,44 +33,22 @@ export default function SignUp() {
     }
     setLoading(false);
   }
-  /* google provider */
 
-  function googleSignIn() {
-    // [START auth_google_signin_popup]
-
-    googleSignInPopup
-      .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
-
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // eslint-disable-next-line
-        var token = credential.accessToken;
-        // The signed-in user info.
-        // eslint-disable-next-line
-        var user = result.user;
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        // eslint-disable-next-line
-        var errorCode = error.code;
-        // eslint-disable-next-line
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        // eslint-disable-next-line
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        // eslint-disable-next-line
-        var credential = error.credential;
-        // ...
-      });
-    // [END auth_google_signin_popup]
+  async function githubSignIn(e) {
+    try {
+      setError("");
+      setLoading(true);
+      await signinWithGitHub();
+      history.push("/");
+    } catch {
+      setError("Failed to create an account");
+    }
+    setLoading(false);
   }
 
   return (
     <div>
-      <h3 className="w-responsive text-center mx-auto mb-4 p-3 mt-2 text-muted">
+      <h3 className="w-responsive text-center mx-auto mb-4 p-3 mt-2">
         Sign Up
       </h3>
       <Card>
@@ -83,7 +61,6 @@ export default function SignUp() {
                   src="https://cloud-fm947y3ba.vercel.app/2google.svg"
                   alt="google"
                   style={imgStyles}
-                  onClick={googleSignIn}
                 />
               </Col>
               <Col>
@@ -91,6 +68,7 @@ export default function SignUp() {
                   src="https://cloud-fm947y3ba.vercel.app/0github.svg"
                   alt="github"
                   style={imgStyles}
+                  onClick={githubSignIn}
                 />
               </Col>
               <Col>
@@ -116,6 +94,7 @@ export default function SignUp() {
             <Button
               className="w-100"
               type="submit"
+              color="teal"
               onClick={handleSubmit}
               disabled={loading}
             >

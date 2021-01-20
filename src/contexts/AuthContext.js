@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { auth } from "../firebase";
+import firebase from "../firebase";
 
 const AuthContext = createContext();
 
@@ -12,16 +12,16 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   function signUp(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return firebase.auth().createUserWithEmailAndPassword(email, password);
   }
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return firebase.auth().signInWithEmailAndPassword(email, password);
   }
   function logout() {
-    return auth.signOut();
+    return firebase.auth().signOut();
   }
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return firebase.auth().sendPasswordResetEmail(email);
   }
   function updateEmail(email) {
     return currentUser.updateEmail(email);
@@ -29,14 +29,13 @@ export function AuthProvider({ children }) {
   function updatePassword(password) {
     return currentUser.updatePassword(password);
   }
-  function googleSignInPopup(){
-    var provider = new auth.GoogleAuthProvider();
-    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    return auth().signInWithPopup(provider)
+  function signinWithGitHub() {
+    setLoading(true);
+    return firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
       setLoading(false);
     });
@@ -51,7 +50,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
-    googleSignInPopup
+    signinWithGitHub
   };
   return (
     <AuthContext.Provider value={value}>
