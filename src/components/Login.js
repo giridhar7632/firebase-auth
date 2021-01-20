@@ -6,7 +6,12 @@ import { Link, useHistory } from "react-router-dom";
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, signinWithGitHub } = useAuth();
+  const {
+    login,
+    signinWithGitHub,
+    signinWithGoogle,
+    signinWithFacebook,
+  } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
   const history = useHistory();
@@ -41,6 +46,30 @@ export default function Login() {
     }
     setLoading(false);
   }
+  // sign in with google
+  async function googleSignIn(e) {
+    try {
+      setError("");
+      setLoading(true);
+      await signinWithGoogle();
+      history.push("/");
+    } catch {
+      setError("Failed to create an account");
+    }
+    setLoading(false);
+  }
+  // sign in with facebook
+  function facebookSignIn(e) {
+    try {
+      setError("");
+      setLoading(true);
+      signinWithFacebook();
+      history.push("/");
+    } catch {
+      setError("Failed to create an account");
+    }
+    setLoading(false);
+  }
 
   return (
     <div>
@@ -54,6 +83,7 @@ export default function Login() {
                 src="https://cloud-fm947y3ba.vercel.app/2google.svg"
                 alt="google"
                 style={imgStyles}
+                onClick={googleSignIn}
               />
             </Col>
             <Col>
@@ -69,6 +99,7 @@ export default function Login() {
                 src="https://cloud-fm947y3ba.vercel.app/1facebook.svg"
                 alt="facebook"
                 style={imgStyles}
+                onClick={facebookSignIn}
               />
             </Col>
           </Row>

@@ -18,7 +18,7 @@ export default function Dashboard() {
       setError("Failed to log out");
     }
   }
-  console.log(currentUser.providerData[0].providerId)
+  console.log(currentUser.displayName)
 
   return (
     <>
