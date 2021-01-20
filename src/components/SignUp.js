@@ -7,7 +7,7 @@ export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { signUp, signinWithGitHub, signinWithGoogle, signinWithFacebook } = useAuth();
+  const { signUp, signinWithGitHub, signinWithGoogle, signinWithFacebook, signinAnonymously } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
   const history = useHistory();
@@ -69,6 +69,18 @@ export default function SignUp() {
     }
     setLoading(false);
   }
+  // sign in anonymously
+  function anonymousSignIn(e) {
+    try {
+      setError("");
+      setLoading(true);
+      signinAnonymously();
+      history.push("/");
+    } catch {
+      setError("Failed to create an account");
+    }
+    setLoading(false);
+  }
 
   return (
     <div>
@@ -102,6 +114,14 @@ export default function SignUp() {
                   alt="facebook"
                   style={imgStyles}
                   onClick={facebookSignIn}
+                />
+              </Col>
+              <Col>
+                <img
+                  src="https://cloud-rk0r5kzax.vercel.app/0anonymous.svg"
+                  alt="anonymous"
+                  style={imgStyles}
+                  onClick={anonymousSignIn}
                 />
               </Col>
             </Row>

@@ -10,6 +10,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     <a href="https://google.com/account">Google</a> |
     <a href="https://github.com/">GitHub</a> |
     <a href="https://facebook.com/">Facebook</a> |
-    <a href="https://mail.google.com/">Email</a>
-  </p>
+    <a href="https://mail.google.com/">Email</a> |
+    <a href="https://anonymous-login.giridhar7632.repl.co/"> Anonymous</a>
+  </p><br><br>
+
+**Live at:** [https://firebase-auth.giridhar7632.vercel.app/](https://firebase-auth.giridhar7632.vercel.app/)
+
 </p>
