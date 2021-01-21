@@ -12,7 +12,7 @@ import ForgotPassword from "./components/ForgotPassword";
 function App() {
   return (
     <Container
-      className="d-flex align-items-center justify-content-center"
+      className="d-flex align-items-center justify-content-center responsive"
       style={{ minHeight: "100vh" }}
     >
       <div className="w-100" style={{ maxWidth: "400px" }}>

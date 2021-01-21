@@ -36,11 +36,11 @@ export default function Login() {
     setLoading(false);
   }
   // sign in with github
-  async function githubSignIn(e) {
+  function githubSignIn(e) {
     try {
       setError("");
       setLoading(true);
-      await signinWithGitHub();
+      signinWithGitHub();
       history.push("/");
     } catch {
       setError("Failed to create an account");
