@@ -16,5 +16,6 @@ a {
   color: #02c39a !important;
 }
 a:hover {
+  text-underline-position: below !important;
   text-decoration-style: wavy !important;
 }
